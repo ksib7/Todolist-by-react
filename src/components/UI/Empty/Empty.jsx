@@ -7,7 +7,7 @@ import cl from "./Empty.module.css";
 
 export const Empty = () => {
   return (
-    <Stack className={cl.messageBlock} sx={{ width: "30%" }} spacing={2}>
+    <Stack className={cl.messageBlock} spacing={2}>
       <Alert
         className={cl.message}
         style={{ border: "2px solid #60a3d8", borderRadius: "6px" }}
