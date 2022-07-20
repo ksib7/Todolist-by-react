@@ -26,12 +26,14 @@ export const TodoList = ({
           {isEdit === item.id ? (
             <form className={cl.newTask} onSubmit={() => save(item.id)}>
               <Input
-                style={{ maxWidth: "500px", width: "100%" }}
+                style={{ maxWidth: "500px", width: "100%", height: "40px" }}
                 autoFocus
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
               />
-              <Button>Save</Button>
+              <Button style={{ marginLeft: "20px", height: "100%" }}>
+                Save
+              </Button>
             </form>
           ) : (
             <div>
