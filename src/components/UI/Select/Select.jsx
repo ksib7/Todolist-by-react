@@ -17,7 +17,7 @@ export const Select = ({
       <div
         style={{
           transition: "0.2s",
-          transform: `rotate(${open ? "180deg" : 0})`,
+          transform: `rotate(${!open ? "90deg" : "0deg"})`,
         }}
         className={cl.arrow}
       >

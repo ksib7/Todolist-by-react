@@ -46,8 +46,9 @@ export const Tasks = () => {
   }, [filtered, sort]);
 
   const sortedAndSearchTasks = useMemo(() => {
-    return sortedTasks.filter((item) =>
-      item.value.toLowerCase().includes(search)
+    return sortedTasks.filter(
+      (item) => item.value.toLowerCase().includes(search.toLowerCase())
+      /*  item.value.toUpperCase().includes(search) */
     );
   }, [search, sortedTasks]);
 

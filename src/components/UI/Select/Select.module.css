@@ -30,6 +30,7 @@
   display: inline-block;
   top: 25%;
   right: 3%;
+  z-index: -1;
 }
 
 @media (max-width: 526px) {
