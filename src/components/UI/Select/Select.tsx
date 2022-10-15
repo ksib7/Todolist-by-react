@@ -29,7 +29,7 @@ export const Select: FC<ISelect> = ({
         className={cl.select}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        onClick={() => setOpen(!open)}
+        onPointerUp={() => setOpen(!open)}
       >
         <option disabled value="">
           {defaultName}

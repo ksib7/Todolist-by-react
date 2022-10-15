@@ -32,7 +32,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build ",
     "lint": "eslint src --ext .jsx --ext .tsx",
     "fix": "eslint src --ext .jsx --ext .tsx --fix"
   },
