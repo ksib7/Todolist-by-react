@@ -25,7 +25,7 @@ export const TodoList: FC<ITodoList> = ({
     <div className={cl.taskList}>
       {tasks.map((item) => (
         <div className={cl.flex} key={item.id}>
-          {typeof isEdit === item.id ? (
+          {isEdit === item.id ? (
             <form className={cl.newTask} onSubmit={() => save(item.id)}>
               <Input
                 style={{ maxWidth: "500px", width: "100%", height: "40px" }}
@@ -52,7 +52,7 @@ export const TodoList: FC<ITodoList> = ({
             </div>
           )}
 
-          {typeof isEdit === item.id ? null : (
+          {isEdit === item.id ? null : (
             <div className={cl.flexIcon}>
               <DeleteIcon onClick={() => remove(item)} className={cl.icon} />
               <EditIcon
