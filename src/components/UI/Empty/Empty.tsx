@@ -1,11 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
+
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import AlertTitle from "@mui/material/AlertTitle";
 
 import cl from "./Empty.module.css";
 
-export const Empty = () => {
+export const Empty: FC = () => {
   return (
     <Stack className={cl.messageBlock} spacing={2}>
       <Alert

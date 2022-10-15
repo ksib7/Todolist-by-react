@@ -1,10 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
+import { ISelect } from "./SelectTypes";
+
 import cl from "./Select.module.css";
 
-export const Select = ({
+export const Select: FC<ISelect> = ({
   defaultName,
   value,
   options,

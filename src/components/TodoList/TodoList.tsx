@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, ChangeEvent } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -6,9 +6,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Input } from "../UI/Input/Input";
 import { Button } from "../UI/Button/Button";
 
+import { ITodoList } from "./TodoListTypes";
+
 import cl from "./TodoList.module.css";
 
-export const TodoList = ({
+export const TodoList: FC<ITodoList> = ({
   tasks,
   remove,
   edited,
@@ -23,13 +25,15 @@ export const TodoList = ({
     <div className={cl.taskList}>
       {tasks.map((item) => (
         <div className={cl.flex} key={item.id}>
-          {isEdit === item.id ? (
+          {typeof isEdit === item.id ? (
             <form className={cl.newTask} onSubmit={() => save(item.id)}>
               <Input
                 style={{ maxWidth: "500px", width: "100%", height: "40px" }}
                 autoFocus
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setValue(e.target.value)
+                }
               />
               <Button style={{ marginLeft: "20px", height: "100%" }}>
                 Save
@@ -48,7 +52,7 @@ export const TodoList = ({
             </div>
           )}
 
-          {isEdit === item.id ? null : (
+          {typeof isEdit === item.id ? null : (
             <div className={cl.flexIcon}>
               <DeleteIcon onClick={() => remove(item)} className={cl.icon} />
               <EditIcon
