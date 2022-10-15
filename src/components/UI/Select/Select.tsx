@@ -29,6 +29,7 @@ export const Select: FC<ISelect> = ({
         className={cl.select}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        onBlur={() => setOpen(false)}
         onPointerUp={() => setOpen(!open)}
       >
         <option disabled value="">
