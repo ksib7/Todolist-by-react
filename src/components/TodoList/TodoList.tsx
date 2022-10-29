@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, ChangeEvent } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -6,9 +6,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Input } from "../UI/Input/Input";
 import { Button } from "../UI/Button/Button";
 
+import { ITodoList } from "./TodoListTypes";
+
 import cl from "./TodoList.module.css";
 
-export const TodoList = ({
+export const TodoList: FC<ITodoList> = ({
   tasks,
   remove,
   edited,
@@ -29,7 +31,9 @@ export const TodoList = ({
                 style={{ maxWidth: "500px", width: "100%", height: "40px" }}
                 autoFocus
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setValue(e.target.value)
+                }
               />
               <Button style={{ marginLeft: "20px", height: "100%" }}>
                 Save
@@ -37,12 +41,19 @@ export const TodoList = ({
             </form>
           ) : (
             <div>
-              <div
-                style={{ cursor: "pointer", marginBottom: "5px" }}
-                className={item.status ? cl.completed : ""}
-                onClick={() => completed(item.id)}
-              >
-                {item.value}
+              <div className={cl.inputCheckboxFlex}>
+                <input
+                  style={{ width: "19px", height: "19px", marginRight: "15px" }}
+                  type="checkbox"
+                  checked={item.status}
+                />
+                <div
+                  style={{ cursor: "pointer", marginBottom: "5px" }}
+                  className={item.status ? cl.completed : ""}
+                  onClick={() => completed(item.id)}
+                >
+                  {item.value}
+                </div>
               </div>
               <div className={cl.date}>{item.date}</div>
             </div>

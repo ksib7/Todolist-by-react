@@ -1,10 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
+import { ISelect } from "./SelectTypes";
+
 import cl from "./Select.module.css";
 
-export const Select = ({
+export const Select: FC<ISelect> = ({
   defaultName,
   value,
   options,
@@ -27,7 +29,8 @@ export const Select = ({
         className={cl.select}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        onClick={() => setOpen(!open)}
+        onBlur={() => setOpen(false)}
+        onPointerUp={() => setOpen(!open)}
       >
         <option disabled value="">
           {defaultName}

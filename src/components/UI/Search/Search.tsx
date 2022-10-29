@@ -1,10 +1,10 @@
-import React from "react";
+import React, { ComponentPropsWithoutRef } from "react";
 
 import SearchIcon from "@mui/icons-material/Search";
 
 import cl from "./Search.module.css";
 
-export const Search = ({ ...props }) => {
+export const Search = ({ ...props }: ComponentPropsWithoutRef<"input">) => {
   return (
     <form className={cl.form}>
       <input {...props} className={cl.input} type="search" />

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { FC, useEffect, useMemo } from "react";
 import { useState } from "react";
 
 import { TodoForm } from "../../components/TodoForm/TodoForm";
@@ -7,17 +7,20 @@ import { Empty } from "../../components/UI/Empty/Empty";
 import { Search } from "../../components/UI/Search/Search";
 import { Select } from "../../components/UI/Select/Select";
 
-export const Tasks = () => {
-  const [todoList, setTodoList] = useState([]);
+import { ITasks } from "./TaskTypes.";
+
+export const Tasks: FC = () => {
+  const [todoList, setTodoList] = useState<ITasks[]>([]);
   const [filtered, setFiltered] = useState(todoList);
   const [sort, setSort] = useState("");
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState<boolean | string>(false);
   const [edit, setEdit] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const storage = JSON.parse(window.localStorage.getItem("todo")) || [];
+    const storage =
+      JSON.parse(window.localStorage.getItem("todo") as string) || [];
     setTodoList(storage);
   }, []);
 
@@ -25,13 +28,13 @@ export const Tasks = () => {
     setFiltered(todoList);
   }, [todoList]);
 
-  const addTask = (newTask) => {
+  const addTask = (newTask: ITasks) => {
     const addItem = [...todoList, newTask];
     setTodoList(addItem);
     window.localStorage.setItem("todo", JSON.stringify(addItem));
   };
 
-  const removeTask = (todo) => {
+  const removeTask = (todo: ITasks) => {
     const removeItem = todoList.filter((item) => item.id !== todo.id);
     setTodoList(removeItem);
     window.localStorage.setItem("todo", JSON.stringify(removeItem));
@@ -39,26 +42,28 @@ export const Tasks = () => {
 
   const sortedTasks = useMemo(() => {
     if (sort) {
-      return [...filtered].sort((a, b) => a[sort].localeCompare(b[sort]));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return [...filtered].sort((a: any, b: any) =>
+        a[sort].localeCompare(b[sort])
+      );
     } else {
       return filtered;
     }
   }, [filtered, sort]);
 
   const sortedAndSearchTasks = useMemo(() => {
-    return sortedTasks.filter(
-      (item) => item.value.toLowerCase().includes(search.toLowerCase())
-      /*  item.value.toUpperCase().includes(search) */
+    return sortedTasks.filter((item) =>
+      item.value.toLowerCase().includes(search.toLowerCase())
     );
   }, [search, sortedTasks]);
 
-  const editTasks = (id, value) => {
+  const editTasks = (id: string, value: string) => {
     setStatus(id);
     setEdit(value);
   };
 
-  const saveTasks = (id) => {
-    let changedTask = [...todoList].filter((item) => {
+  const saveTasks = (id: string) => {
+    const changedTask = [...todoList].filter((item) => {
       if (item.id === id) {
         item.value = edit;
         item.date = new Date().toLocaleString();
@@ -71,8 +76,8 @@ export const Tasks = () => {
     window.localStorage.setItem("todo", JSON.stringify(changedTask));
   };
 
-  const completedTask = (id) => {
-    let completedTask = [...todoList].filter((item) => {
+  const completedTask = (id: string) => {
+    const completedTask = [...todoList].filter((item) => {
       if (item.id === id) {
         item.status = !item.status;
       }
@@ -82,7 +87,7 @@ export const Tasks = () => {
     window.localStorage.setItem("todo", JSON.stringify(completedTask));
   };
 
-  const filteredTasks = (status) => {
+  const filteredTasks = (status: boolean | string) => {
     if (status === "All") {
       setFiltered(todoList);
     } else {
@@ -110,7 +115,9 @@ export const Tasks = () => {
       <Search
         placeholder="Search here . . ."
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setSearch(e.target.value)
+        }
       />
       {todoList.length ? (
         <TodoList
