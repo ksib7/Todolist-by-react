@@ -45,7 +45,7 @@ export const TodoList: FC<ITodoList> = ({
                 <input
                   style={{ width: "19px", height: "19px", marginRight: "15px" }}
                   type="checkbox"
-                  checked={item.status ? cl.completed : ""}
+                  checked={item.status}
                 />
                 <div
                   style={{ cursor: "pointer", marginBottom: "5px" }}
