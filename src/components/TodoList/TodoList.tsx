@@ -41,12 +41,19 @@ export const TodoList: FC<ITodoList> = ({
             </form>
           ) : (
             <div>
-              <div
-                style={{ cursor: "pointer", marginBottom: "5px" }}
-                className={item.status ? cl.completed : ""}
-                onClick={() => completed(item.id)}
-              >
-                {item.value}
+              <div className={cl.inputCheckboxFlex}>
+                <input
+                  style={{ width: "19px", height: "19px", marginRight: "15px" }}
+                  type="checkbox"
+                  checked={item.status ? cl.completed : ""}
+                />
+                <div
+                  style={{ cursor: "pointer", marginBottom: "5px" }}
+                  className={item.status ? cl.completed : ""}
+                  onClick={() => completed(item.id)}
+                >
+                  {item.value}
+                </div>
               </div>
               <div className={cl.date}>{item.date}</div>
             </div>
